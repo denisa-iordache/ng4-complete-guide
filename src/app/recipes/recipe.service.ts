@@ -2,9 +2,10 @@ import { EventEmitter, Injectable } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
+import { Subject } from "rxjs";
 @Injectable()
 export class RecipeService {
-    recipeSelected = new EventEmitter<Recipe>();
+    // recipeSelected = new EventEmitter<Recipe>();
 
     private recipes: Recipe[] = [
         new Recipe('Chicken Schnitzel', 'A super tasty chicken schnitzel!', 'https://www.prestij.ro/uploads/produse/660x660/253--snitel-de-pui-in-fulgi-de-porumb-cu-cartofi-prajiti-150-200g.jpg',
