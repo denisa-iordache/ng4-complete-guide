@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 @Injectable()
 export class RecipeService {
     // recipeSelected = new EventEmitter<Recipe>();
+    recipedChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [
         new Recipe('Chicken Schnitzel', 'A super tasty chicken schnitzel!', 'https://www.prestij.ro/uploads/produse/660x660/253--snitel-de-pui-in-fulgi-de-porumb-cu-cartofi-prajiti-150-200g.jpg',
@@ -32,5 +33,20 @@ export class RecipeService {
 
     getRecipe(id: number){
         return this.recipes[id];
+    }
+
+    addRecipe(recipe: Recipe){
+        this.recipes.push(recipe);
+        this.recipedChanged.next(this.recipes.slice())
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe){
+        this.recipes[index] = newRecipe;
+        this.recipedChanged.next(this.recipes.slice())
+    }
+
+    deleteRecipe(index: number){
+        this.recipes.splice(index, 1);
+        this.recipedChanged.next(this.recipes.slice())
     }
 }
